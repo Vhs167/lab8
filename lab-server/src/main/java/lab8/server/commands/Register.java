@@ -1,0 +1,25 @@
+package lab8.server.commands;
+
+import lab8.common.commands.CommandType;
+import lab8.common.dto.Request;
+import lab8.common.dto.Response;
+import lab8.server.auth.AuthService;
+
+import java.util.Collections;
+
+public class Register extends AbstractCommand implements Command {
+    private final AuthService authService;
+
+    public Register(AuthService authService) {
+        super("register", CommandType.NO_ARG_WITH_AUTH, "команда для запуска процесса регистрации");
+        this.authService = authService;
+    }
+
+    public Response execute(Request request, Long userId) {
+        boolean result = authService.register(request.getUserName(), request.getPassword());
+        if (!result) {
+            return new Response(Collections.emptyList(), "Ошибка");
+        }
+        return new Response(Collections.emptyList(), "Успешно");
+    }
+}

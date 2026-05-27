@@ -10,3 +10,15 @@ script1.txt
 script2.txt
 test.csv
 s_checks.xml
+*.cer
+*.jks
+Californium3.properties
+*.csr
+lab-client/client-trust.jks
+lab-client/client.jks
+lab-client/Californium3.properties
+lab-server/*.cer
+lab-server/Californium3.properties
+lab-server/*.jks
+lab-client/*.csr
+lab-client/*.jks
