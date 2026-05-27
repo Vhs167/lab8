@@ -1,4 +1,4 @@
 [submodule "lab-client/gui"]
 	path = lab-client/gui
 	url = https://github.com/mikhalexandr/programming-lab8-gui.git
-	branch = lab8
+	branch = main
