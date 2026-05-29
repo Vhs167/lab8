@@ -29,7 +29,7 @@ public final class Client {
         DTLSClient dtlsClient;
 
         try {
-            dtlsClient = new DTLSClient("localhost", 11111);
+            dtlsClient = new DTLSClient("localhost", 8080);
         } catch (Exception e) {
             ioManager.printError(e.getMessage());
             return;

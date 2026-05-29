@@ -5,7 +5,7 @@ import lab8.common.dto.CommandInfo;
 import lab8.common.dto.Request;
 import lab8.common.utils.Validator;
 import lab8.server.auth.AuthService;
-import lab7.server.commands.*;
+import lab8.server.commands.*;
 import lab8.common.dto.Response;
 
 import lab8.server.commands.*;

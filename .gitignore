@@ -22,3 +22,4 @@ lab-server/Californium3.properties
 lab-server/*.jks
 lab-client/*.csr
 lab-client/*.jks
+lab-server/docker-compose.yml

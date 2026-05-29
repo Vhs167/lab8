@@ -9,12 +9,12 @@ import lab8.common.utils.Serializer;
 import lab8.server.auth.AuthService;
 import lab8.server.database.UserRepository;
 import lab8.server.handlers.RequestHandler;
-import lab7.server.managers.*;
+import lab8.server.managers.*;
 import lab8.server.managers.CollectionManager;
 import lab8.server.managers.CommandManager;
 import lab8.server.network.ChunkProcessor;
 import lab8.server.network.DTLSTransport;
-import lab7.server.utils.*;
+import lab8.server.utils.*;
 import lab8.server.utils.ServerLogger;
 
 import java.util.List;
@@ -89,7 +89,7 @@ public class Server {
     }
 
     public static void main(String[] args) throws Exception {
-        Server server = new Server(11111);
+        Server server = new Server(8080);
         server.start();
         Thread.currentThread().join();
     }

@@ -155,7 +155,7 @@ public class HumanBeingRepository {
 
             return list;
         } catch (SQLException e) {
-            ServerLogger.logger.log(Level.WARNING, "Ошибка получения коллекии");
+            ServerLogger.logger.log(Level.WARNING, "Ошибка получения коллекции");
             return Collections.emptyList();
         }
     }

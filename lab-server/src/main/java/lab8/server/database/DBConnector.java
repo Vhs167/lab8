@@ -11,9 +11,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBConnector {
-    private static final String URL = "jdbc:postgresql://pg:5432/studs";
-    private static final String USER = "s503257";
-    private static final String PASSWORD = "******";
+    private static final String URL = "jdbc:postgresql://127.0.0.1:5432/studs?sslmode=disable";
+    private static final String USER = "lab";
+    private static final String PASS = "lab";
 
     private static final HikariDataSource dataSource;
 
@@ -22,7 +22,9 @@ public class DBConnector {
 
         config.setJdbcUrl(URL);
         config.setUsername(USER);
-        config.setPassword(PASSWORD);
+        config.setPassword(PASS);
+
+        config.addDataSourceProperty("ssl", "false");
 
         config.setMaximumPoolSize(30);
         config.setMinimumIdle(2);
