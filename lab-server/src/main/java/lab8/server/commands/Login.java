@@ -21,6 +21,6 @@ public class Login extends AbstractCommand implements Command {
         if (id == null) {
             return new Response(Collections.emptyList(), "Ошибка");
         }
-        return new Response(Collections.emptyList(), "Успешно");
+        return new Response(Collections.singletonList(id), "Успешно");
     }
 }

@@ -10,8 +10,10 @@ import org.eclipse.californium.scandium.dtls.CertificateType;
 import org.eclipse.californium.scandium.dtls.x509.SingleCertificateProvider;
 import org.eclipse.californium.scandium.dtls.x509.StaticNewAdvancedCertificateVerifier;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.security.KeyStore;
@@ -31,13 +33,13 @@ public class DTLSTransport {
         DtlsConfig.register();
 
         KeyStore keyStore = KeyStore.getInstance("JKS");
-        keyStore.load(new FileInputStream("server.jks"), "password".toCharArray());
+        keyStore.load(openStore("server.jks"), "password".toCharArray());
 
         PrivateKey privateKey = (PrivateKey) keyStore.getKey("server", "password".toCharArray());
         Certificate[] certChain = keyStore.getCertificateChain("server");
 
         KeyStore trustStore = KeyStore.getInstance("JKS");
-        trustStore.load(new FileInputStream("server-trust.jks"), "password".toCharArray());
+        trustStore.load(openStore("server-trust.jks"), "password".toCharArray());
 
         List<X509Certificate> trustedCerts = new ArrayList<>();
         Enumeration<String> aliases = trustStore.aliases();
@@ -75,5 +77,13 @@ public class DTLSTransport {
     public void send(byte[] data, InetSocketAddress addr) {
         AddressEndpointContext ctx = new AddressEndpointContext(addr);
         connector.send(RawData.outbound(data, ctx, null, false));
+    }
+
+    private static InputStream openStore(String name) throws Exception {
+        File file = new File(name);
+        if (!file.exists()) {
+            file = new File("lab-server", name);
+        }
+        return new FileInputStream(file);
     }
 }

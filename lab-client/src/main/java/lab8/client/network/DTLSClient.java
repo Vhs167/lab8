@@ -15,7 +15,9 @@ import org.eclipse.californium.scandium.dtls.CertificateType;
 import org.eclipse.californium.scandium.dtls.x509.SingleCertificateProvider;
 import org.eclipse.californium.scandium.dtls.x509.StaticNewAdvancedCertificateVerifier;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.security.KeyStore;
@@ -42,12 +44,12 @@ public class DTLSClient {
         this.serverAddress = new InetSocketAddress(InetAddress.getByName(host), port);
 
         KeyStore keyStore = KeyStore.getInstance("JKS");
-        keyStore.load(new FileInputStream("client.jks"), "password".toCharArray());
+        keyStore.load(openStore("client.jks"), "password".toCharArray());
         PrivateKey privateKey = (PrivateKey) keyStore.getKey("client", "password".toCharArray());
         Certificate[] certChain = keyStore.getCertificateChain("client");
 
         KeyStore trustStore = KeyStore.getInstance("JKS");
-        trustStore.load(new FileInputStream("client-trust.jks"), "password".toCharArray());
+        trustStore.load(openStore("client-trust.jks"), "password".toCharArray());
         List<X509Certificate> trustedCerts = new ArrayList<>();
         Enumeration<String> aliases = trustStore.aliases();
 
@@ -117,5 +119,13 @@ public class DTLSClient {
         } finally {
             pendingResponse = null;
         }
+    }
+
+    private static InputStream openStore(String name) throws Exception {
+        File file = new File(name);
+        if (!file.exists()) {
+            file = new File("lab-client", name);
+        }
+        return new FileInputStream(file);
     }
 }
